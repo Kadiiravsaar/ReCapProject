@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+
+using Buisness.Concrete;
+using DataAccess.Concrete.EntityFramework;
+
+CarManager carManager = new CarManager(new EFCarDal());
+foreach (var car in carManager.GetAll())
+{
+    Console.WriteLine(car.Description); 
+   
+}

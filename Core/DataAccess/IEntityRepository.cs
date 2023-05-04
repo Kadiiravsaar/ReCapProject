@@ -10,8 +10,8 @@ namespace Core.DataAccess
 {
     public interface IEntityRepository<TEntity> where TEntity : class,IEntity,new()
     {
-        List<TEntity> GetAll(Expression<Func<T,bool>> filter = null);
-        TEntity GetById(Expression<Func<T,bool>> filter);
+        List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
+        TEntity GetById(Expression<Func<TEntity, bool>> filter);
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
