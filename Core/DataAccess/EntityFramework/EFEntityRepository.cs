@@ -32,7 +32,6 @@ namespace Core.DataAccess.EntityFramework
                 deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
             }
-
         }
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
@@ -60,7 +59,6 @@ namespace Core.DataAccess.EntityFramework
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
-
             }
         }
     }

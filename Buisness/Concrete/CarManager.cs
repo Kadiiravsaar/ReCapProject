@@ -1,16 +1,10 @@
 ﻿using Buisness.Abstract;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Buisness.Concrete
 {
-    public class CarManager : IService<Car>
+    public class CarManager : ICarService
     {
         private readonly ICarDal _carDal;
 
@@ -19,14 +13,14 @@ namespace Buisness.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car entity)
+        public void Add(Car car)
         {
-            _carDal.Add(entity);
+            _carDal.Add(car);
         }
 
-        public void Delete(Car entity)
+        public void Delete(Car car)
         {
-            _carDal.Delete(entity);
+            _carDal.Delete(car);
         }
 
         public List<Car> GetAll()
@@ -39,9 +33,19 @@ namespace Buisness.Concrete
             return _carDal.GetById(c => c.Id == id);
         }
 
-        public void Update(Car entity)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            _carDal.Update(entity);
+            return _carDal.GetAll(x => x.BrandId == brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(x => x.ColorId == colorId);
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }
