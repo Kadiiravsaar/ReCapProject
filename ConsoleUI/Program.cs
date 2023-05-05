@@ -2,6 +2,7 @@
 
 using Buisness.Concrete;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 
 //CarManager carManager = new CarManager(new EFCarDal());
 //foreach (var car in carManager.GetAll())
@@ -10,8 +11,20 @@ using DataAccess.Concrete.EntityFramework;
 
 //}
 
+//CarManager carManager = new CarManager(new EFCarDal());
+//foreach (var car in carManager.GetCarsByBrandId(3))
+//{
+//    Console.WriteLine(car.ModelYear);
+//}
+
 CarManager carManager = new CarManager(new EFCarDal());
-foreach (var car in carManager.GetCarsByBrandId(3))
+carManager.Add(new Car()
 {
-    Console.WriteLine(car.ModelYear);
-}
+    BrandId = 1,
+    ColorId = 1,
+    DailyPrice = 250, // 0 veya eksi girersek consola hata fırlatma işlemi yaptık
+    Description = "Bu bir BMW serisinden araçtır",
+    ModelYear = 2018
+});
+
+Console.WriteLine(carManager.GetByCarId(4).ModelYear);
