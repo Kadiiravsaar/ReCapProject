@@ -29,11 +29,23 @@ using Entities.Concrete;
 
 //Console.WriteLine(carManager.GetByCarId(4).ModelYear);
 
-CarManager carManager = new CarManager(new EFCarDal());
-foreach (var carDetail in carManager.GetCarDetails())
+//CarManager carManager = new CarManager(new EFCarDal());
+//foreach (var carDetail in carManager.GetCarDetails())
+//{
+//    Console.WriteLine(carDetail.CarName + " / "
+//        + carDetail.BrandName +" / "
+//        + carDetail.ColorName +" / " 
+//        + carDetail.DailyPrice);
+//}
+
+//CarManager carManager = new CarManager(new EFCarDal());
+//foreach (var car in carManager.GetAll())
+//{
+//    Console.WriteLine(car.CarName);
+//}
+
+BrandManager brandManager = new BrandManager(new EFBrandDal());
+brandManager.Add(new Brand()
 {
-    Console.WriteLine(carDetail.CarName + " / "
-        + carDetail.BrandName +" / "
-        + carDetail.ColorName +" / " 
-        + carDetail.DailyPrice);
-}
+    Name = "Ford"
+});
