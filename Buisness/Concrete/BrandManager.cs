@@ -42,7 +42,7 @@ namespace Buisness.Concrete
 
         public Brand GetByBrandId(int brandId)
         {
-            return _brandDal.GetById(x=>x.Id == brandId);
+            return _brandDal.GetById(x=>x.BrandId == brandId);
         }
 
         public IResult Update(Brand brand)

@@ -31,7 +31,7 @@ namespace Buisness.Concrete
 
         public Color GetByColorId(int colorId)
         {
-            return _colorDal.GetById(c => c.Id == colorId);
+            return _colorDal.GetById(c => c.ColorId == colorId);
         }
 
         public void Update(Color color)

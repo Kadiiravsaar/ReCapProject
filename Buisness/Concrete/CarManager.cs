@@ -40,7 +40,7 @@ namespace Buisness.Concrete
 
         public Car GetByCarId(int id)
         {
-            return _carDal.GetById(c => c.Id == id);
+            return _carDal.GetById(c => c.CarId == id);
         }
 
         public List<CarDetailDto> GetCarDetails()
