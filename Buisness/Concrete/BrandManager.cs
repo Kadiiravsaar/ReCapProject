@@ -19,13 +19,13 @@ namespace Buisness.Concrete
         }
         public IResult Add(Brand brand)
         {
-            if (brand.Name.Length<2)
+            if (brand.Name.Length < 2)
             {
                 return new ErrorResult();
             }
 
-           _brandDal.Add(brand);
-            return new SuccessResult("Ürün Eklendi");  
+            _brandDal.Add(brand);
+            return new SuccessResult("Ürün Eklendi");
         }
 
         public IResult Delete(Brand brand)
@@ -37,12 +37,12 @@ namespace Buisness.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),"Tüm Markalar bunlardır");
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), "Tüm Markalar bunlardır");
         }
 
-        public Brand GetByBrandId(int brandId)
+        public IDataResult<Brand> GetByBrandId(int brandId)
         {
-            return _brandDal.GetById(x=>x.BrandId == brandId);
+            return new SuccessDataResult<Brand>(_brandDal.GetById(x => x.BrandId == brandId));
         }
 
         public IResult Update(Brand brand)
