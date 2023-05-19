@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Buisness.Constants.Messages;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -29,37 +30,37 @@ namespace Buisness.Concrete
             }
             else
             {
-                return new ErrorResult("araba uygun değil");
+                return new ErrorResult(RentalMessages.RentalNotAdded);
             }
-            return new SuccessResult("Eklendi");
+            return new SuccessResult(RentalMessages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)
         {
 
             _rentalDal.Delete(rental);
-            return new SuccessResult("Silindi");
+            return new SuccessResult(RentalMessages.RentalDeleted);
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),RentalMessages.RentalListed);
         }
 
         public IDataResult<List<RentalDetailDto>> GetByRentalDetails()
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails()); 
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), RentalMessages.RentalGetDetail); 
         }
 
         public IDataResult<Rental> GetByRentalId(int rentalId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.GetById(x => x.RentalId == rentalId));
+            return new SuccessDataResult<Rental>(_rentalDal.GetById(x => x.RentalId == rentalId),RentalMessages.RentalGet);
         }
 
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
-            return new SuccessResult("Güncellendi");
+            return new SuccessResult(RentalMessages.RentalNotUpdated);
         }
     }
 }

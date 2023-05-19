@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Buisness.Constants.Messages;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,7 +23,7 @@ namespace Buisness.Concrete
         public IResult Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult("Kullanıcı Eklendi");
+            return new SuccessResult(UserMessages.UserAdded);
         }
     }
 }

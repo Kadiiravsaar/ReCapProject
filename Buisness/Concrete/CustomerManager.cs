@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Buisness.Constants.Messages;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -24,13 +25,13 @@ namespace Buisness.Concrete
         public IResult Add(Customer customer)
         {
             _customerDal.Add(customer);
-            return new SuccessResult("Müşteri Eklendi");
+            return new SuccessResult(CustomerMessages.CustomerAdded);
         }
 
         public IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);
-            return new SuccessResult("Müşteri silindi.");
+            return new SuccessResult(CustomerMessages.CustomerDeleted);
         }
 
         public IDataResult<List<Customer>> GetAll()
@@ -40,14 +41,14 @@ namespace Buisness.Concrete
 
         public IDataResult<Customer> GetByCustomerId(int customerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.GetById(x=>x.CustomerId == customerId),"Getirildi");
+            return new SuccessDataResult<Customer>(_customerDal.GetById(x=>x.CustomerId == customerId),CustomerMessages.GetByCustomerId);
 
         }
 
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
-            return new SuccessResult("Müşteri güncellendi.");
+            return new SuccessResult(CustomerMessages.CustomerUpdated);
         }
     }
 }
