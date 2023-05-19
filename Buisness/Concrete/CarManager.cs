@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Buisness.Constants.Messages;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,29 +18,20 @@ namespace Buisness.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.DailyPrice > 0)
-            {
-                _carDal.Add(car);
-                return new SuccessResult("Ürün başaryla eklendi.");
-
-            }
-            else
-            {
-                return new ErrorResult("Ürün eklenemedi.");
-            }
-
+            _carDal.Add(car);
+            return new SuccessResult(CarMessages.CarAdded);
         }
 
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            return new SuccessResult("Ürün silindi.");
+            return new SuccessResult(CarMessages.CarDeleted);
         }
 
         public IDataResult<List<Car>> GetAll()
         {
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), "Ürünler Listelendi.");
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.CarListed);
         }
 
         public IDataResult<Car> GetByCarId(int id)
@@ -51,7 +43,7 @@ namespace Buisness.Concrete
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             var result = _carDal.GetCarDetails();
-            return new SuccessDataResult<List<CarDetailDto>>(result, "detaylar listelendi.");
+            return new SuccessDataResult<List<CarDetailDto>>(result, CarMessages.CarDetailListed);
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
@@ -67,7 +59,7 @@ namespace Buisness.Concrete
         public IResult Update(Car car)
         {
             _carDal.Update(car);
-            return new SuccessResult("ürünler güncellendi");
+            return new SuccessResult(CarMessages.CarUpdated);
         }
     }
 }
