@@ -18,5 +18,7 @@ namespace Core.Ultities.Results
         }
 
         public T Data { get; }
+
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Buisness.Constants.Messages;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -25,19 +26,19 @@ namespace Buisness.Concrete
             }
 
             _brandDal.Add(brand);
-            return new SuccessResult("Ürün Eklendi");
+            return new SuccessResult(BrandMessages.BrandAdded);
         }
 
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            return new Result(true, "Ürün Silindi");
+            return new Result(true,BrandMessages.BrandDeleted);
 
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), "Tüm Markalar bunlardır");
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), BrandMessages.BrandListed);
         }
 
         public IDataResult<Brand> GetByBrandId(int brandId)
@@ -48,7 +49,7 @@ namespace Buisness.Concrete
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult("Ürün Güncellendi");
+            return new SuccessResult(BrandMessages.BrandUpdated);
 
         }
     }
