@@ -18,6 +18,10 @@ builder.Services.AddScoped<IBrandDal, EFBrandDal>();
 builder.Services.AddScoped<ICarService, CarManager>();
 builder.Services.AddScoped<ICarDal, EFCarDal>();
 
+builder.Services.AddScoped<IColorService, ColorManager>();
+builder.Services.AddScoped<IColorDal, EFColorDal>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
