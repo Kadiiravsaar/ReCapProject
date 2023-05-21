@@ -10,6 +10,7 @@ namespace Buisness.Abstract
 {
     public interface IUserService
     {
-        IResult Add(User user); 
+        IResult Add(User user);
+        IDataResult<List<User>> GetAll();
     }
 }

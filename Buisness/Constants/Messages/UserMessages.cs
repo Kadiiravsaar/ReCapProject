@@ -9,6 +9,6 @@ namespace Buisness.Constants.Messages
     public static class UserMessages
     {
         public static string UserAdded = "Kullanıcı Eklendi.";
-
+        internal static string UsersListed;
     }
 }

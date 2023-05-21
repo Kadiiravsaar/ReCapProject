@@ -25,5 +25,11 @@ namespace Buisness.Concrete
             _userDal.Add(user);
             return new SuccessResult(UserMessages.UserAdded);
         }
+
+        public IDataResult<List<User>> GetAll()
+        {
+            var result = _userDal.GetAll();
+            return new SuccessDataResult<List<User>>(result, UserMessages.UsersListed);
+        }
     }
 }
