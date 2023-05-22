@@ -1,5 +1,8 @@
 ﻿using Buisness.Abstract;
 using Buisness.Constants.Messages;
+using Buisness.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,12 +21,10 @@ namespace Buisness.Concrete
         {
             _brandDal = brandDal;
         }
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-            if (brand.Name.Length < 2)
-            {
-                return new ErrorResult();
-            }
+           
 
             _brandDal.Add(brand);
             return new SuccessResult(BrandMessages.BrandAdded);

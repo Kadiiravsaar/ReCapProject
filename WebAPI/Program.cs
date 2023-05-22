@@ -5,6 +5,8 @@ using Buisness.Concrete;
 using Buisness.Constants.Messages;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using FluentValidation;
+
 using Buisness.DependencyResolvers.AutoFac;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 //builder.Services.AddScoped<IBrandService, BrandManager>();
 //builder.Services.AddScoped<IBrandDal, EFBrandDal>();
