@@ -51,7 +51,7 @@ namespace Core.DataAccess.EntityFramework
                 return result;
             }
         }
-
+        
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())
