@@ -9,8 +9,8 @@ namespace Core.Ultities.Helpers.FileHelper
 {
     public interface IFileHelper
     {
-        string Upload(IFormFile file, string root);
+        string Upload(IFormFile file, string root); // file => yüklenecek olan dosyanın kendisidir 
         void Delete(string filePath);
-        string Update(IFormFile file, string filePath, string root);
+        string Update(IFormFile file, string filePath, string root); // Root => Oluşturulacak dosyanın yolu
     }
 }
