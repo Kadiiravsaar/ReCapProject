@@ -16,4 +16,4 @@ namespace Core.Ultities.Security.JWT
         public string SecurityKey { get; set; }
     }
 }
-}
+

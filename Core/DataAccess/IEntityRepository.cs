@@ -11,6 +11,7 @@ namespace Core.DataAccess
     public interface IEntityRepository<TEntity> where TEntity : class,IEntity,new()
     {
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
+        TEntity Get(Expression<Func<TEntity, bool>> filter);
         TEntity GetById(Expression<Func<TEntity, bool>> filter);
         void Add(TEntity entity);
         void Update(TEntity entity);

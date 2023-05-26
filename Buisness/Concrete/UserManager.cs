@@ -1,5 +1,6 @@
 ﻿using Buisness.Abstract;
 using Buisness.Constants.Messages;
+using Core.Entities.Concrete;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -30,6 +31,12 @@ namespace Buisness.Concrete
         {
             var result = _userDal.GetAll();
             return new SuccessDataResult<List<User>>(result, UserMessages.UsersListed);
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            var result = _userDal.Get(x=>x.Email == email);
+            return new SuccessDataResult<User>(result, "maile göre getirildi");
         }
     }
 }

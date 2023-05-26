@@ -1,4 +1,5 @@
-﻿using Core.Ultities.Results;
+﻿using Core.Entities.Concrete;
+using Core.Ultities.Results;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace Buisness.Abstract
     {
         IResult Add(User user);
         IDataResult<List<User>> GetAll();
+        IDataResult<User> GetByMail(string email);
     }
 }
