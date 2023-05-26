@@ -8,6 +8,7 @@ using DataAccess.Concrete.EntityFramework;
 using FluentValidation;
 
 using Buisness.DependencyResolvers.AutoFac;
+using Core.Ultities.Security.JWT;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 
 //builder.Services.AddScoped<IBrandService, BrandManager>();
