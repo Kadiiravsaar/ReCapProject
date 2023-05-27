@@ -4,11 +4,13 @@ using Buisness.Abstract;
 using Buisness.Concrete;
 using Castle.DynamicProxy;
 using Core.Ultities.Helpers.FileHelper;
+using Core.Ultities.Security.JWT;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +43,11 @@ namespace Buisness.DependencyResolvers.AutoFac
             builder.RegisterType<EFCarImageDal>().As<ICarImageDal>().SingleInstance();
 
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
+
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+
+
 
 
 

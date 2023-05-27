@@ -38,5 +38,13 @@ namespace Buisness.Concrete
             var result = _userDal.Get(x=>x.Email == email);
             return new SuccessDataResult<User>(result, "maile göre getirildi");
         }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            var result = _userDal.GetClaims(user);
+            return new SuccessDataResult<List<OperationClaim>>(result, "Claims getirildi");
+
+
+        }
     }
 }

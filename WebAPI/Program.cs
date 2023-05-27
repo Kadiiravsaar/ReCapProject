@@ -9,6 +9,8 @@ using FluentValidation;
 
 using Buisness.DependencyResolvers.AutoFac;
 using Core.Ultities.Security.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Core.Ultities.Security.Encryption;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+
+        };
+
+    });
 
 
 //builder.Services.AddScoped<IBrandService, BrandManager>();
@@ -55,6 +74,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
