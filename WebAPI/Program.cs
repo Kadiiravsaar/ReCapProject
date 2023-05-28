@@ -1,18 +1,20 @@
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
-using Buisness.Abstract;
-using Buisness.Concrete;
-using Buisness.Constants.Messages;
-using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
-using FluentValidation;
-
+using Autofac.Extensions.DependencyInjection;
 using Buisness.DependencyResolvers.AutoFac;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Ultities.IoC;
+using Core.Ultities.Security.Encryption;
 using Core.Ultities.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Core.Ultities.Security.Encryption;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseServiceProviderFactory
+    (new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new AutoFacBuisnessModule()));
+
+
 
 // Add services to the container.
 
@@ -21,24 +23,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidIssuer = tokenOptions.Issuer,
-            ValidAudience = tokenOptions.Audience,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
-
-        };
-
-    });
 
 
 //builder.Services.AddScoped<IBrandService, BrandManager>();
@@ -59,9 +43,34 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //builder.Services.AddScoped<IUserService, UserManager>();
 //builder.Services.AddScoped<IUserDal, EFUserDal>();
 
-builder.Host.UseServiceProviderFactory
-    (new AutofacServiceProviderFactory());
-builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new AutoFacBuisnessModule()));
+
+
+
+var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+
+        };
+
+    });
+
+
+
+builder.Services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
+
+
+
 
 var app = builder.Build();
 

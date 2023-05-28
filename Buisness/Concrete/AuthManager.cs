@@ -68,9 +68,9 @@ namespace Buisness.Concrete
         public IResult UserExists(string email)
         {
             IResult result = BuisnessRules.Run(CheckIfUserExist(email));
-            if (result == null);
+            if (result != null)
             {
-                return new ErrorResult("kullanıcı mevcut"); // burası değişebilir
+                return new ErrorResult("kullanıcı mevcut");
             }
             return new SuccessResult();
         }
@@ -78,7 +78,7 @@ namespace Buisness.Concrete
         private IResult CheckIfUserExist(string email)
         {
             var result = _userService.GetByMail(email).Data;
-            if (result == null)
+            if (result != null)
             {
                 return new ErrorResult();
             }
